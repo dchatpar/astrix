@@ -58,9 +58,14 @@ export const BudgetChart: React.FC<BudgetChartProps> = ({ data, totalBudget, onC
   const spent = data.reduce((acc, item) => acc + item.cost, 0);
 
   return (
-    <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg">
-      <h3 className="text-lg font-bold text-white mb-2">Budget Allocation & Spend</h3>
-      <div className="h-56">
+    <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg flex flex-col h-[450px]">
+      <div className="flex justify-between items-baseline flex-shrink-0">
+        <h3 className="text-lg font-bold text-white mb-2">Budget Allocation & Spend</h3>
+        <p className="text-xs text-slate-400">
+          <span className="font-bold text-white">${spent.toLocaleString()}</span> of ${totalBudget.toLocaleString()}
+        </p>
+      </div>
+      <div className="flex-grow w-full min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -84,7 +89,7 @@ export const BudgetChart: React.FC<BudgetChartProps> = ({ data, totalBudget, onC
           </PieChart>
         </ResponsiveContainer>
       </div>
-       <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4 text-xs">
+       <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4 text-xs flex-shrink-0">
          {data.map((entry, index) => (
           <div key={index} className="flex items-center">
             <div className="w-2.5 h-2.5 rounded-full mr-2" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>

@@ -26,9 +26,9 @@ export const StockVolumeChart: React.FC<StockVolumeChartProps> = ({ volumeData }
     const eventData = volumeData.filter(d => d.event);
 
     return (
-        <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg">
-            <h3 className="text-lg font-bold text-white mb-4">Stock Volume Over Time</h3>
-            <div className="h-80">
+        <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg h-96 flex flex-col">
+            <h3 className="text-lg font-bold text-white mb-4 flex-shrink-0">Stock Volume Over Time</h3>
+            <div className="flex-grow w-full min-h-0">
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart data={volumeData} margin={{ top: 5, right: 10, left: 0, bottom: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#374151" />

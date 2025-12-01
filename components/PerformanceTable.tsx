@@ -49,6 +49,17 @@ export const PerformanceTable: React.FC<PerformanceTableProps> = ({ data, onChan
     document.body.removeChild(link);
   };
 
+  const handleInteraction = (item: Budget) => {
+    onChannelSelect(item.name === selectedChannel ? null : item.name);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, item: Budget) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleInteraction(item);
+    }
+  };
+
   return (
     <div className="bg-slate-900/70 border border-slate-800 rounded-xl backdrop-blur-sm shadow-lg overflow-hidden">
       <div className="p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
@@ -67,8 +78,12 @@ export const PerformanceTable: React.FC<PerformanceTableProps> = ({ data, onChan
           return (
             <div 
               key={item.name}
-              onClick={() => onChannelSelect(item.name === selectedChannel ? null : item.name)}
-              className={`p-4 rounded-lg border transition-colors duration-200 ${selectedChannel === item.name ? 'bg-blue-900/40 border-blue-700' : 'bg-slate-800/40 border-slate-700'}`}
+              onClick={() => handleInteraction(item)}
+              onKeyDown={(e) => handleKeyDown(e, item)}
+              tabIndex={0}
+              role="button"
+              aria-pressed={selectedChannel === item.name}
+              className={`p-4 rounded-lg border transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${selectedChannel === item.name ? 'bg-blue-900/40 border-blue-700' : 'bg-slate-800/40 border-slate-700'}`}
             >
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center gap-3">
@@ -126,7 +141,11 @@ export const PerformanceTable: React.FC<PerformanceTableProps> = ({ data, onChan
                 <tr 
                   key={item.name} 
                   className={`border-b border-slate-800 transition-colors duration-200 cursor-pointer ${selectedChannel === item.name ? 'bg-blue-900/40' : 'hover:bg-slate-800/40'}`}
-                  onClick={() => onChannelSelect(item.name === selectedChannel ? null : item.name)}
+                  onClick={() => handleInteraction(item)}
+                  onKeyDown={(e) => handleKeyDown(e, item)}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={selectedChannel === item.name}
                 >
                   <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">
                     <div className="flex items-center gap-3">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 interface KpiCardProps {
@@ -15,6 +15,7 @@ interface KpiCardProps {
 
 const useCountUp = (endValue: number, duration: number = 1500) => {
     const [count, setCount] = useState(0);
+    const frameRef = useRef<number>();
     
     useEffect(() => {
         let start = 0;
@@ -30,18 +31,25 @@ const useCountUp = (endValue: number, duration: number = 1500) => {
             if (!startTime) startTime = timestamp;
             const progress = timestamp - startTime;
             const percentage = Math.min(progress / duration, 1);
-            const easedValue = percentage < 0.5 ? 4 * percentage * percentage * percentage : 1 - Math.pow(-2 * percentage + 2, 3) / 2;
+            // Ease out cubic
+            const easedValue = 1 - Math.pow(1 - percentage, 3);
 
             setCount(easedValue * (end - start) + start);
             
             if (progress < duration) {
-                requestAnimationFrame(animate);
+                frameRef.current = requestAnimationFrame(animate);
             } else {
                 setCount(end);
             }
         };
         
-        requestAnimationFrame(animate);
+        frameRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (frameRef.current) {
+                cancelAnimationFrame(frameRef.current);
+            }
+        };
         
     }, [endValue, duration]);
     

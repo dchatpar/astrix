@@ -92,7 +92,7 @@ export const useMockData = () => {
   const kpiData: KpiData = {
     totalReach,
     reachChange: 15.2,
-    engagementRate: (totalEngagement / totalReach) * 100,
+    engagementRate: totalReach > 0 ? (totalEngagement / totalReach) * 100 : 0,
     engagementChange: 8.9,
     budgetSpent,
     budgetChange: (budgetSpent / campaignData.totalBudget) * 100,
