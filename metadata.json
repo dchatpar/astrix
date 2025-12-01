@@ -1,0 +1,5 @@
+{
+  "name": "Astrix.ae Campaign Performance Dashboard",
+  "description": "A detailed interface for tracking the performance of market awareness campaigns for Astrix.ae clients. This dashboard provides a comprehensive, graphical view of all campaign mechanisms, metrics, and progress for the client Metalpha.",
+  "requestFramePermissions": []
+}
