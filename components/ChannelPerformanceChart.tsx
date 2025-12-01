@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import { Budget } from '../types';
@@ -29,23 +30,21 @@ export const ChannelPerformanceChart: React.FC<ChannelPerformanceChartProps> = (
         .map((d, index) => ({...d, index}));
 
   return (
-    <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg h-96 flex flex-col">
-      <h3 className="text-lg font-bold text-white mb-4 flex-shrink-0">Channel Performance (CTR %)</h3>
-      <div className="flex-grow w-full min-h-0">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" horizontal={false}/>
-            <XAxis type="number" tick={{ fill: '#9ca3af', fontSize: 11 }} tickLine={{ stroke: '#4b5563' }} />
-            <YAxis type="category" dataKey="name" width={90} tick={{ fill: '#9ca3af', fontSize: 11 }} tickLine={{ stroke: '#4b5563' }} />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(100, 116, 139, 0.1)' }}/>
-            <Bar dataKey="ctr" name="Click-Through Rate">
-               {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+    <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 backdrop-blur-sm shadow-lg h-96">
+      <h3 className="text-lg font-bold text-white mb-4">Channel Performance (CTR %)</h3>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 20, left: 20, bottom: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" horizontal={false}/>
+          <XAxis type="number" tick={{ fill: '#9ca3af', fontSize: 12 }} tickLine={{ stroke: '#4b5563' }} />
+          <YAxis type="category" dataKey="name" width={80} tick={{ fill: '#9ca3af', fontSize: 12 }} tickLine={{ stroke: '#4b5563' }} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(100, 116, 139, 0.1)' }}/>
+          <Bar dataKey="ctr" name="Click-Through Rate">
+             {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

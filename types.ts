@@ -1,3 +1,4 @@
+
 export interface CampaignData {
   clientName: string;
   campaignTitle: string;
@@ -14,8 +15,6 @@ export interface KpiData {
   budgetChange: number;
   irSiteVisits: number;
   visitsChange: number;
-  stockVolumeInfluence: number;
-  avgDailyVolume: number;
 }
 
 export interface DailyPerformance {
@@ -42,7 +41,6 @@ export interface Budget {
   impressions: number;
   ctr: number;
   cost: number;
-  performance: DailyPerformance[];
 }
 
 export interface TimelinePhase {
@@ -51,18 +49,4 @@ export interface TimelinePhase {
   title: string;
   description: string;
   status: 'Completed' | 'In Progress' | 'Upcoming';
-}
-
-export interface ImpactMechanism {
-  id: string;
-  name: string;
-  description: string;
-  value: string;
-  icon: string;
-}
-
-export interface VolumeDataPoint {
-  date: string;
-  volume: number;
-  event?: string;
 }
